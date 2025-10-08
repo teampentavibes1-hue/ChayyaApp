@@ -14,8 +14,8 @@ class _HomePageAdminState extends State<HomePageAdmin> {
   final List<Map<String, dynamic>> users = [
     {"name": "Misha", "balance": 120.0},
     {"name": "Priya", "balance": 200.0},
-    {"name": "Sree Raj", "balance": -50.0},
-    {"name": "Ashis", "balance": 80.0},
+    {"name": "Sreeraj", "balance": -50.0},
+    {"name": "Ashish", "balance": 80.0},
     {"name": "Raji", "balance": 500.0},
     {"name": "Rekha", "balance": 300.0},
     {"name": "Jeeja", "balance": 100.0},
@@ -95,8 +95,15 @@ class _HomePageAdminState extends State<HomePageAdmin> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Admin Dashboard"),
+        title: const Text("Admin Dashboard1"),
         centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          tooltip: "Go Back",
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.history),
