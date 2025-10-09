@@ -1,6 +1,8 @@
 import 'package:chaya_team/pages/first_screen.dart';
 import 'package:chaya_team/pages/home_admin.dart';
+import 'package:chaya_team/pages/splash.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -111,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void rootLogin(BuildContext ctx) {
+  void rootLogin(BuildContext ctx) async {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         backgroundColor: Colors.green,
@@ -123,14 +125,19 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
+    final _sharedPrefs = await SharedPreferences.getInstance();
+    _sharedPrefs.setBool(SAVE_KEY_NMAE, true);
+
     if (_userTYpe == 2) {
+      USER_KEY_NMAE = 'Misha';
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (ctx) => const HomePage(userName: 'Misha', balance: 122.00),
+          builder: (ctx) => HomePage(userName: USER_KEY_NMAE, balance: 122.00),
         ),
       );
     } else if (_userTYpe == 1) {
+      USER_KEY_NMAE = 'Sunil S';
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (ctx) => const HomePageAdmin()),

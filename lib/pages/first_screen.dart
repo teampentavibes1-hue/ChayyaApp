@@ -1,5 +1,7 @@
 import 'package:chaya_team/pages/login.dart';
+import 'package:chaya_team/pages/splash.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,7 +47,9 @@ class HomePage extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.logout),
             tooltip: "Logout",
-            onPressed: () => _onLogout(context),
+            onPressed: () {
+              logOut(context);
+            },
           ),
         ],
       ),
@@ -72,6 +76,15 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void logOut(BuildContext ctx) async {
+    final _sharedPrefs = await SharedPreferences.getInstance();
+    await _sharedPrefs.clear();
+    Navigator.of(ctx).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (ctx1) => ScreenSplash()),
+      (route) => false,
     );
   }
 }

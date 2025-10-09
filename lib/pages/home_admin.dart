@@ -1,5 +1,7 @@
+import 'package:chaya_team/pages/splash.dart';
 import 'package:chaya_team/pages/trans_history.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // ---------------- HOME PAGE ADMIN -----------------
 class HomePageAdmin extends StatefulWidget {
@@ -95,18 +97,18 @@ class _HomePageAdminState extends State<HomePageAdmin> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Admin Dashboard1"),
+        title: const Text("Admin Dashboard"),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          tooltip: "Go Back",
+          tooltip: "Back",
           onPressed: () {
-            Navigator.pop(context);
+            gotoSplash(context);
           },
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.history),
+            icon: const Icon(Icons.logout),
             tooltip: "View Transaction History",
             onPressed: _openHistoryPage,
           ),
@@ -152,6 +154,13 @@ class _HomePageAdminState extends State<HomePageAdmin> {
           );
         },
       ),
+    );
+  }
+
+  void gotoSplash(BuildContext ctx) async {
+    Navigator.of(ctx).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (ctx1) => ScreenSplash()),
+      (route) => false,
     );
   }
 }
